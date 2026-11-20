@@ -37,7 +37,7 @@ def main(config: dict) -> None:
     model = retrieved_model.model
     tokenizer = retrieved_model.tokenizer
 
-    train_dataset = GSM8KDataset(Path(config["dataset_path"]), split="train")
+    train_dataset = GSM8KDataset(Path(config["dataset_dir"]), split="train")
 
     # Sample problems without replacement, with a fixed seed so the sample is reproducible
     random_generator = np.random.default_rng(seed=0)

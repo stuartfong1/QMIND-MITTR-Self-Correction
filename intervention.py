@@ -99,7 +99,7 @@ def main(config: dict) -> None:
     probe_layer_module = model.model.layers[config["probe_layer"]]
     hook_handle = probe_layer_module.register_forward_hook(steering_hook)
 
-    test_dataset = GSM8KDataset(Path(config["dataset_path"]), split="test")
+    test_dataset = GSM8KDataset(Path(config["dataset_dir"]), split="test")
 
     for question, correct_answer in test_dataset:
         # Format the problem with the same prompt used to generate the probe's training traces.

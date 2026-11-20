@@ -10,8 +10,8 @@ checkpoint_dir: null
 # Local directory containing the model weights and tokenizer files
 weight_path: null
 
-# Local directory containing the GSM-8K parquet files from Hugging Face
-dataset_path: null
+# Local directory containing the GSM-8K files
+dataset_dir: null
 
 # Dimension of the residual stream
 residual_dim: 4096

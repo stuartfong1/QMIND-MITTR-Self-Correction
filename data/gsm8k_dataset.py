@@ -1,6 +1,6 @@
 """Datasets for GSM-8K problems and for DeepSeek reasoning traces generated on them.
 
-GSM8KDataset reads the Hugging Face parquet files and yields (question, correct_answer).
+GSM8KDataset reads the main_{split}.csv files and yields (question, correct_answer).
 ReasoningTraceDataset reads the traces saved by generate_traces.py and yields token IDs
 together with token-level self-correction labels obtained by keyword matching.
 """
@@ -97,24 +97,20 @@ def extract_final_answer(gsm8k_answer: str) -> str:
 
 
 class GSM8KDataset(Dataset):
-    """GSM-8K problems loaded from the Hugging Face parquet files.
+    """GSM-8K problems loaded from CSV files.
 
     Parameters
     ----------
-    dataset_path : Path
-        Directory containing the GSM-8K parquet files, e.g. main/train-*.parquet.
+    dataset_dir : Path
+        Directory containing main_train.csv and main_test.csv.
     split : str
         Either "train" or "test".
 
     """
 
-    def __init__(self, dataset_path: Path, split: str) -> None:
-        # Find the parquet file(s) for this split anywhere under dataset_path
-        parquet_paths = sorted(Path(dataset_path).glob(f"**/{split}-*.parquet"))
-        assert parquet_paths, f"No parquet files found for split '{split}' in {dataset_path}"
-
+    def __init__(self, dataset_dir: Path, split: str) -> None:
         # Columns are "question" and "answer" (worked solution ending in "#### <answer>")
-        self.problems = pd.concat([pd.read_parquet(parquet_path) for parquet_path in parquet_paths], ignore_index=True)
+        self.problems = pd.read_csv(Path(dataset_dir) / f"main_{split}.csv")
 
     def __len__(self) -> int:
         """Return the number of problems in the split."""
