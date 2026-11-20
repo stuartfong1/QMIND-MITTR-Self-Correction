@@ -5,7 +5,12 @@ from typing import ClassVar
 
 import torch
 from torch import nn
-from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizerBase
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    PreTrainedTokenizerBase,
+    PreTrainedTokenizerFast,
+)
 
 
 @dataclass
@@ -74,7 +79,7 @@ class ModelRegistry:
 
                 model.eval()
 
-                tokenizer = AutoTokenizer.from_pretrained(cls._config["weight_path"])
+                tokenizer = PreTrainedTokenizerFast.from_pretrained(cls._config["weight_path"])
 
                 cls._models[model_name] = RetrievedModel(
                     model=model,
