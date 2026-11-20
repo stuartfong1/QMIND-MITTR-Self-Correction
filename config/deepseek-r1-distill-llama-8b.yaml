@@ -1,0 +1,25 @@
+# Experiment name
+exp_name: deepseek-r1-distill-llama-8b
+
+# Model name
+model_name: deepseek-r1-distill-llama-8b
+
+# Directory to save checkpoints
+checkpoint_dir: null
+
+# Local directory containing the model weights and tokenizer files
+weight_path: null
+
+# Local directory containing the GSM-8K parquet files from Hugging Face
+dataset_path: null
+
+# Dimension of the residual stream
+residual_dim: 4096
+
+# Zero-indexed decoder layer to probe
+probe_layer: 19
+
+# Steering strength alpha in h <- h + alpha * d, where d is the unit-norm direction.
+# This is in absolute residual-stream units, so it should be tuned relative to the
+# typical residual norm at probe_layer (placeholder value)
+intervention_factor: 8.0
