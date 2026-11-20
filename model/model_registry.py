@@ -66,12 +66,11 @@ class ModelRegistry:
 
         match model_name:
             case "deepseek-r1-distill-llama-8b":
-                device = "cuda" if torch.cuda.is_available() else "cpu"
-
                 model = AutoModelForCausalLM.from_pretrained(
                     cls._config["weight_path"],
-                    torch_dtype="bfloat16",
-                ).to(device)
+                    device_map="auto",
+                    torch_dtype="auto",
+                )
 
                 model.eval()
 

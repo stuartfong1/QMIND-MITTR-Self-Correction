@@ -24,8 +24,11 @@ if TYPE_CHECKING:
 # Matching is case-sensitive so that e.g. "actually" in the middle of a sentence is not counted.
 SELF_CORRECTION_KEYWORDS = [
     "Wait",
+    "hold on",
+    "any other way",
     "Hmm",
     "Actually",
+    "Alternatively",
     "But wait",
     "Let me check",
     "Let me double-check",
